@@ -274,6 +274,10 @@ void CAlermclockDlg::OnTimer(UINT nIDEvent)
 		// disable stop button
 		m_stop.EnableWindow(FALSE);
 		// play sound
+		// The MAKEINTRESOURCE macro converts an integer value 
+		// to a resource type compatible with Win32 resource-management functions. 
+		// This macro is used in place of a string containing the name of the 
+		// resource. 
 		PlaySound(MAKEINTRESOURCE(IDS_SWAVE), NULL, SND_NOSTOP|SND_ASYNC|SND_RESOURCE|SND_LOOP);
 	}
 	else
