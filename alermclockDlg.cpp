@@ -6,7 +6,8 @@
 #include "alermclockDlg.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <mmsystem.h>  
+	#pragma   comment(lib,"Winmm.lib")   
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -265,13 +266,15 @@ void CAlermclockDlg::OnTimer(UINT nIDEvent)
 	if (_tot<=0)
 	{
 		KillTimer(ID_TIMER);
-		// MessageBox("Time's up!");
+// MessageBox("Time's up!");
 		// enable comboBox
 		m_min.EnableWindow(TRUE);
 		m_sec.EnableWindow(TRUE);
 		m_start.EnableWindow(TRUE);
 		// disable stop button
 		m_stop.EnableWindow(FALSE);
+		// play sound
+		PlaySound(MAKEINTRESOURCE(IDS_SWAVE), NULL, SND_NOSTOP|SND_ASYNC|SND_RESOURCE|SND_LOOP);
 	}
 	else
 	{

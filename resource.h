@@ -7,6 +7,7 @@
 #define IDS_ABOUTBOX                    101
 #define IDD_ALERMCLOCK_DIALOG           102
 #define IDR_MAINFRAME                   128
+#define IDS_SWAVE                       131
 #define IDC_START                       1000
 #define IDC_MIN                         1001
 #define IDC_SEC                         1002
@@ -20,7 +21,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        129
+#define _APS_NEXT_RESOURCE_VALUE        132
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1007
 #define _APS_NEXT_SYMED_VALUE           101
