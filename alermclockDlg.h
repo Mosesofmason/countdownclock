@@ -50,9 +50,11 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
+	CFont *_pfont;
 	long int _tot;
 	int _minutes;
 	int _seconds;
+	CString _chars;
 };
 
 //{{AFX_INSERT_LOCATION}}
