@@ -130,12 +130,12 @@ BOOL CAlermclockDlg::OnInitDialog()
 	// TODO: Add extra initialization here
 	
     char str_combolist[60][30];
-//	m_min.;
-//	m_sec.sort=FALSE;
+
 	for (int i=0; i<60; i++)
 	{
 		itoa(i, str_combolist[i], 10);
 	}
+	// init context of comboBox
 	int nIdx;
 	for (i=0; i<60; i++)
 	{
@@ -153,6 +153,17 @@ BOOL CAlermclockDlg::OnInitDialog()
 		MessageBox(LPCTSTR(buff));
 	
 */
+	// Change Font of countdown second box
+	CStatic *pStc=(CStatic*) GetDlgItem(IDC_SSEC); // point to CStatic
+	LOGFONT lf; // create a logfont
+	_pfont=new CFont; // create a CFont
+	lf.lfHeight=lf.lfHeight*10; // power logfont Height
+//	_pfont->DeleteObject();
+	_pfont->CreateFontIndirect(&lf); // let CFont get current powered logfont
+	pStc->SetFont(_pfont); // set CStatic Font
+
+	_pfont->DeleteObject(); // delete CFont
+
 
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
@@ -171,7 +182,7 @@ void CAlermclockDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// If you add a minimize button to your dialog, you will need the code below
+//  If you add a minimize button to your dialog, you will need the code below
 //  to draw the icon.  For MFC applications using the document/view model,
 //  this is automatically done for you by the framework.
 
@@ -207,15 +218,18 @@ HCURSOR CAlermclockDlg::OnQueryDragIcon()
 	return (HCURSOR) m_hIcon;
 }
 
+// start countdown
 void CAlermclockDlg::OnStart() 
 {
 	// TODO: Add your control notification handler code here
 //	char buff[30];
 	UpdateData(TRUE);
+	// get current select item
 	int i=m_min.GetCurSel();
 	int j=m_sec.GetCurSel();
 	_minutes=m_min.GetItemData(i);
 	_seconds=m_sec.GetItemData(j);
+	// if not selected, let value(s) is/are 0
 	if (_minutes<0)
 	{
 		_minutes=0;
@@ -224,17 +238,21 @@ void CAlermclockDlg::OnStart()
 	{
 		_seconds=0;
 	}
+	// disable comboBox
 	m_min.EnableWindow(FALSE);
 	m_sec.EnableWindow(FALSE);
 	m_start.EnableWindow(FALSE);
 	m_stop.EnableWindow(TRUE);
+	// cal total seconds
 	_tot=_minutes*60+_seconds;
 	
 /*
 		itoa(_tot, buff, 10);
 		MessageBox(LPCTSTR(buff));
 */
-		SetTimer (ID_TIMER, 1000, NULL);	
+	// start timer
+	SetTimer (ID_TIMER, 1000, NULL);
+	// goto onTimer()
 
 
 
@@ -243,18 +261,25 @@ void CAlermclockDlg::OnStart()
 void CAlermclockDlg::OnTimer(UINT nIDEvent) 
 {
 	// TODO: Add your message handler code here and/or call default
+	// if time's up
 	if (_tot<=0)
 	{
 		KillTimer(ID_TIMER);
-		MessageBox("Time's up!");
+		// MessageBox("Time's up!");
+		// enable comboBox
 		m_min.EnableWindow(TRUE);
 		m_sec.EnableWindow(TRUE);
 		m_start.EnableWindow(TRUE);
+		// disable stop button
 		m_stop.EnableWindow(FALSE);
 	}
 	else
 	{
+		// countdown
 		_tot--;
+		_chars.Format("%d", _tot);
+		// display countdown seconds in CStatic label
+		SetDlgItemText(IDC_SSEC, _chars);
 	}
 	CDialog::OnTimer(nIDEvent);
 }
@@ -262,6 +287,7 @@ void CAlermclockDlg::OnTimer(UINT nIDEvent)
 void CAlermclockDlg::OnStop() 
 {
 	// TODO: Add your control notification handler code here
+	// stop timer
 	KillTimer(ID_TIMER);
 	m_start.EnableWindow(TRUE);
 	m_sec.EnableWindow(TRUE);
