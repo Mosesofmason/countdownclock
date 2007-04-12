@@ -259,7 +259,7 @@ void CAlermclockDlg::OnStart()
 
 }
 
-void CAlermclockDlg::OnTimer(UINT nIDEvent) 
+void CAlermclockDlg::OnTimer(UINT nIDEvent)
 {
 	// TODO: Add your message handler code here and/or call default
 	// if time's up
@@ -272,7 +272,7 @@ void CAlermclockDlg::OnTimer(UINT nIDEvent)
 		m_sec.EnableWindow(TRUE);
 		m_start.EnableWindow(TRUE);
 		// disable stop button
-		m_stop.EnableWindow(FALSE);
+	//	m_stop.EnableWindow(FALSE);
 		// play sound
 		// The MAKEINTRESOURCE macro converts an integer value 
 		// to a resource type compatible with Win32 resource-management functions. 
@@ -300,4 +300,5 @@ void CAlermclockDlg::OnStop()
 	m_sec.EnableWindow(TRUE);
 	m_min.EnableWindow(TRUE);
 	m_stop.EnableWindow(FALSE);
+	PlaySound(MAKEINTRESOURCE(IDS_SWAVE), NULL, SND_NOSTOP|SND_ASYNC|SND_RESOURCE);
 }
