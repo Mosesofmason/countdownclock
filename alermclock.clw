@@ -13,9 +13,9 @@ Class2=CAlermclockDlg
 Class3=CAboutDlg
 
 ResourceCount=4
-Resource1=IDD_ABOUTBOX
+Resource1=IDD_ALERMCLOCK_DIALOG
 Resource2=IDR_MAINFRAME
-Resource3=IDD_ALERMCLOCK_DIALOG
+Resource3=IDD_ABOUTBOX
 Resource4=IDR_RIGHT_MENU
 
 [CLS:CAlermclockApp]

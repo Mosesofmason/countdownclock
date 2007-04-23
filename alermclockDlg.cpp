@@ -312,12 +312,14 @@ LRESULT CAlermclockDlg::OnMyMessage(WPARAM wParam, LPARAM lParam)
 	{
 		//鼠标双击时主窗口出现  
 		Shell_NotifyIcon (NIM_DELETE, &nid);  
-		AfxGetApp()->m_pMainWnd->ShowWindow(SW_SHOW);
+		AfxGetApp()->m_pMainWnd->ShowWindow(SW_SHOWNORMAL);
+		this->SetForegroundWindow();
 
 	}
 	else if(lParam==WM_RBUTTONDOWN)
 	{
 		//鼠标右键单击弹出菜单  
+		this->SetForegroundWindow();        
         CMenu   menu;  
    
         menu.LoadMenu(IDR_RIGHT_MENU);    
