@@ -95,6 +95,9 @@ BEGIN_MESSAGE_MAP(CAlermclockDlg, CDialog)
 	ON_BN_CLICKED(IDC_START, OnStart)
 	ON_WM_TIMER()
 	ON_BN_CLICKED(IDC_STOP, OnStop)
+	ON_WM_SIZE()
+	ON_WM_DESTROY()
+	ON_MESSAGE(WM_USER+100, OnMyMessage)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -301,4 +304,156 @@ void CAlermclockDlg::OnStop()
 	m_min.EnableWindow(TRUE);
 	m_stop.EnableWindow(FALSE);
 	PlaySound(MAKEINTRESOURCE(IDS_SWAVE), NULL, SND_NOSTOP|SND_ASYNC|SND_RESOURCE);
+}
+
+LRESULT CAlermclockDlg::OnMyMessage(WPARAM wParam, LPARAM lParam)
+{
+	if(lParam==WM_LBUTTONDBLCLK)  
+	{
+		//鼠标双击时主窗口出现  
+		Shell_NotifyIcon (NIM_DELETE, &nid);  
+		AfxGetApp()->m_pMainWnd->ShowWindow(SW_SHOW);
+
+	}
+	else if(lParam==WM_RBUTTONDOWN)
+	{
+		//鼠标右键单击弹出菜单  
+        CMenu   menu;  
+   
+        menu.LoadMenu(IDR_RIGHT_MENU);    
+		//载入事先定义的菜单  
+/*
+        CMenu*   pMenu=menu.GetSubMenu(0);  
+        CPoint   pos;  
+        GetCursorPos(&pos);  
+        pMenu->TrackPopupMenu (TPM_LEFTALIGN|TPM_RIGHTBUTTON, pos.x,pos.y,AfxGetMainWnd());
+*/
+	}
+	return 0;
+}
+
+/*
+
+// 显示托盘图标
+bool CAlermclockDlg::ShowTrayIcon(void)
+{
+	CString strTip;
+	strTip = _T("托盘动态图标示例");
+
+	// 读入初始的图标
+	m_hIconTray.hIcon = AfxGetApp()->LoadIcon(IDI_ICON3);
+	strcpy(m_hIconTray.szTip,(LPCTSTR)strTip);
+
+	// 记录接收由托盘图标发来通知的窗体句柄
+	m_hIconTray.hWnd = this->GetSafeHwnd();
+
+	// 设置图标的ID
+	m_hIconTray.uID = SPECIFIC_ID;
+
+	// 确定由托盘图标引起的消息标识,WM_LBUTTONUP
+	m_hIconTray.uCallbackMessage = ICON_NOTIFY;
+
+	// 托盘图标的属性是图标样式、带提示信息、接收消息
+	m_hIconTray.uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE;
+
+	// 将定制好的图标加入到系统托盘中
+	Shell_NotifyIcon(NIM_ADD,&m_hIconTray);
+
+	return true;
+}
+
+void CMainFrame::OnDestroy()
+{
+CMDIFrameWnd::OnDestroy();
+
+// 删除托盘中的图标
+Shell_NotifyIcon(NIM_DELETE,&m_hIconTray);
+
+}
+// 窗口的恢复
+LRESULT CMainFrame::OnNotifyIcon(WPARAM uID, LPARAM lEvent)
+{
+if (uID == SPECIFIC_ID)
+{
+if(lEvent == WM_LBUTTONDBLCLK)
+{
+this->ShowWindow(SW_SHOWNORMAL);
+this->SetFocus();
+return 0;
+}
+else if(lEvent == WM_RBUTTONUP)
+{
+// 获得当前鼠标位置
+CPoint mouse;
+GetCursorPos(&mouse);
+
+// 读入弹出菜单资源
+CMenu menu;
+menu.LoadMenu(IDR_ExTrayIconTYPE);
+
+// 获得弹出菜单实际显示的部分
+CMenu *pSubMenu = menu.GetSubMenu(0);
+pSubMenu->EnableMenuItem(0,MF_BYCOMMAND | MF_GRAYED);
+pSubMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_RIGHTBUTTON,
+mouse.x,mouse.y,this);
+
+}
+}
+
+return 0;
+}*/
+
+// minimized
+void CAlermclockDlg::OnSize(UINT nType, int cx, int cy) 
+{
+	CDialog::OnSize(nType, cx, cy);
+	// TODO: Add your message handler code here
+	if (nType==SIZE_MINIMIZED)
+	{
+	//	MessageBox ("Text");
+		// put app in the tray icon
+		NOTIFYICONDATA   nid;  
+		nid.cbSize=sizeof (NOTIFYICONDATA);  
+		nid.hWnd=this->m_hWnd;  
+		nid.uFlags=NIF_MESSAGE|NIF_ICON|NIF_TIP;  
+		nid.uID=IDR_MAINFRAME;  
+		nid.hIcon=AfxGetApp()->LoadIcon(IDR_MAINFRAME);  
+   
+		// nid.szTip="AppName V1.0";
+		strcpy(nid.szTip, "AppName V1.0");  
+   
+		nid.uCallbackMessage=WM_USER+100; // 窗口消息
+		Shell_NotifyIcon (NIM_ADD, &nid);  
+
+
+
+		ShowWindow (SW_HIDE); // 放在需要的地方
+
+/*
+				nid.cbSize = sizeof(NOTIFYICONDATA);    
+		        nid.hWnd   = hwnd;  
+				nid.uID    = uID;  */
+
+		
+		   
+   
+		// 该部分负责退出时销毁图标
+/*
+//		NOTIFYICONDATA nid;  
+		nid.cbSize=sizeof(nid);  
+		nid.uID=IDR_MAINFRAME;  
+		nid.hWnd=this->m_hWnd;  
+		Shell_NotifyIcon(NIM_DELETE,&nid);
+*/
+	}
+}
+
+
+
+void CAlermclockDlg::OnDestroy() 
+{
+	CDialog::OnDestroy();
+	
+	// TODO: Add your message handler code here
+	::Shell_NotifyIcon(NIM_DELETE,&nid);   
 }

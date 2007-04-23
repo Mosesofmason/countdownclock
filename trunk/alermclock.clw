@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CAlermclockApp
+LastClass=CAlermclockDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "alermclock.h"
@@ -12,10 +12,11 @@ Class1=CAlermclockApp
 Class2=CAlermclockDlg
 Class3=CAboutDlg
 
-ResourceCount=3
+ResourceCount=4
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Resource3=IDD_ALERMCLOCK_DIALOG
+Resource4=IDR_RIGHT_MENU
 
 [CLS:CAlermclockApp]
 Type=0
@@ -29,7 +30,7 @@ Type=0
 HeaderFile=alermclockDlg.h
 ImplementationFile=alermclockDlg.cpp
 Filter=D
-LastObject=IDC_MIN
+LastObject=CAlermclockDlg
 BaseClass=CDialog
 VirtualFilter=dWC
 
@@ -61,4 +62,10 @@ Control6=IDOK,button,1073807361
 Control7=IDC_STATIC,static,1342308352
 Control8=IDC_STATIC,static,1342308352
 Control9=IDC_SSEC,static,1342308352
+
+[MNU:IDR_RIGHT_MENU]
+Type=1
+Class=?
+Command1=ID_MENUITEM32771
+CommandCount=1
 
