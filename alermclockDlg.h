@@ -47,9 +47,13 @@ protected:
 	afx_msg void OnStart();
 	afx_msg void OnTimer(UINT nIDEvent);
 	afx_msg void OnStop();
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnDestroy();
+	afx_msg LRESULT OnMyMessage (WPARAM wParam, LPARAM lParam);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
+	NOTIFYICONDATA nid;
 	CFont *_pfont;
 	long int _tot;
 	int _minutes;
