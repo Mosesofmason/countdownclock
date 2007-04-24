@@ -6,25 +6,46 @@
 --------------------Configuration: alermclock - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP115.tmp" with contents
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2FA.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/alermclock.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
 "E:\workcopy\alarmclock\alermclockDlg.cpp"
 ]
-Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP115.tmp" 
-Creating command line "link.exe /nologo /subsystem:windows /incremental:yes /pdb:"Debug/alermclock.pdb" /debug /machine:I386 /out:"Debug/alermclock.exe" /pdbtype:sept  .\Debug\alermclock.obj .\Debug\alermclockDlg.obj .\Debug\StdAfx.obj .\Debug\alermclock.res "
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2FA.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2FB.tmp" with contents
+[
+D:\Softwares\Microsoft Visual Studio\VC98\Lib\SHELL32.LIB /nologo /subsystem:windows /incremental:yes /pdb:"Debug/alermclock.pdb" /debug /machine:I386 /out:"Debug/alermclock.exe" /pdbtype:sept 
+.\Debug\alermclock.obj
+.\Debug\alermclockDlg.obj
+.\Debug\StdAfx.obj
+.\Debug\alermclock.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2FB.tmp"
 <h3>Output Window</h3>
 Compiling...
 alermclockDlg.cpp
-Linking...
-Creating command line "bscmake.exe /nologo /o"Debug/alermclock.bsc"  .\Debug\StdAfx.sbr .\Debug\alermclock.sbr .\Debug\alermclockDlg.sbr"
-Creating browse info file...
-<h3>Output Window</h3>
+E:\workcopy\alarmclock\alermclockDlg.cpp(19) : warning C4005: '_WIN32_IE' : macro redefinition
+        d:\softwares\microsoft visual studio\vc98\include\commctrl.h(17) : see previous definition of '_WIN32_IE'
+E:\workcopy\alarmclock\alermclockDlg.cpp(421) : error C2065: 'NIF_INFO' : undeclared identifier
+E:\workcopy\alarmclock\alermclockDlg.cpp(422) : error C2039: 'uTimeout' : is not a member of '_NOTIFYICONDATAA'
+        d:\softwares\microsoft visual studio\vc98\include\shellapi.h(500) : see declaration of '_NOTIFYICONDATAA'
+E:\workcopy\alarmclock\alermclockDlg.cpp(423) : error C2039: 'dwInfoFlags' : is not a member of '_NOTIFYICONDATAA'
+        d:\softwares\microsoft visual studio\vc98\include\shellapi.h(500) : see declaration of '_NOTIFYICONDATAA'
+E:\workcopy\alarmclock\alermclockDlg.cpp(424) : error C2065: 'm_nid' : undeclared identifier
+E:\workcopy\alarmclock\alermclockDlg.cpp(424) : error C2228: left of '.szInfo' must have class/struct/union type
+E:\workcopy\alarmclock\alermclockDlg.cpp(424) : error C2065: 'szMsg' : undeclared identifier
+E:\workcopy\alarmclock\alermclockDlg.cpp(424) : error C2446: ':' : no conversion from 'char *' to 'int'
+        This conversion requires a reinterpret_cast, a C-style cast or function-style cast
+E:\workcopy\alarmclock\alermclockDlg.cpp(425) : error C2228: left of '.szInfoTitle' must have class/struct/union type
+E:\workcopy\alarmclock\alermclockDlg.cpp(425) : error C2065: 'szTitle' : undeclared identifier
+E:\workcopy\alarmclock\alermclockDlg.cpp(425) : error C2446: ':' : no conversion from 'char *' to 'int'
+        This conversion requires a reinterpret_cast, a C-style cast or function-style cast
+Error executing cl.exe.
 
 
 
 <h3>Results</h3>
-alermclock.exe - 0 error(s), 0 warning(s)
+alermclock.exe - 10 error(s), 1 warning(s)
 </pre>
 </body>
 </html>
