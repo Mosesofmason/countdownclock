@@ -188,7 +188,11 @@ IDS_SWAVE               WAVE    DISCARDABLE     "res\\ding.wav"
 
 IDR_RIGHT_MENU MENU DISCARDABLE 
 BEGIN
-    MENUITEM "&Exit",                       ID_MENUITEM32771
+    POPUP "&Exit"
+    BEGIN
+        MENUITEM "&Restore",                    ID_MENU_ITEM_RESTORE
+        MENUITEM "&Exit",                       ID_MENU_ITEM_EXIT
+    END
 END
 
 

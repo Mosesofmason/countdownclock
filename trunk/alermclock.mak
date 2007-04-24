@@ -118,7 +118,7 @@ BSC32_SBRS= \
 <<
 
 LINK32=link.exe
-LINK32_FLAGS=/nologo /subsystem:windows /incremental:yes /pdb:"$(OUTDIR)\alermclock.pdb" /debug /machine:I386 /out:"$(OUTDIR)\alermclock.exe" /pdbtype:sept 
+LINK32_FLAGS=D:\Softwares\Microsoft Visual Studio\VC98\Lib\SHELL32.LIB /nologo /subsystem:windows /incremental:yes /pdb:"$(OUTDIR)\alermclock.pdb" /debug /machine:I386 /out:"$(OUTDIR)\alermclock.exe" /pdbtype:sept 
 LINK32_OBJS= \
 	"$(INTDIR)\alermclock.obj" \
 	"$(INTDIR)\alermclockDlg.obj" \

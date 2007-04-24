@@ -49,10 +49,17 @@ protected:
 	afx_msg void OnStop();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnDestroy();
+	afx_msg void OnMenuItemExit();
+	afx_msg void OnMenuItemRestore();
+	virtual void OnCancel();
 	afx_msg LRESULT OnMyMessage (WPARAM wParam, LPARAM lParam);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+
+
+
 private:
+	void PopupBalloon (LPCTSTR Info, LPCTSTR InfoTitle, /*DWORD Flags, */UINT Timeout);
 	NOTIFYICONDATA nid;
 	CFont *_pfont;
 	long int _tot;

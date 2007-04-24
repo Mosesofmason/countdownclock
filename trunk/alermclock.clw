@@ -30,7 +30,7 @@ Type=0
 HeaderFile=alermclockDlg.h
 ImplementationFile=alermclockDlg.cpp
 Filter=D
-LastObject=CAlermclockDlg
+LastObject=IDCANCEL
 BaseClass=CDialog
 VirtualFilter=dWC
 
@@ -65,7 +65,8 @@ Control9=IDC_SSEC,static,1342308352
 
 [MNU:IDR_RIGHT_MENU]
 Type=1
-Class=?
-Command1=ID_MENUITEM32771
-CommandCount=1
+Class=CAlermclockDlg
+Command1=ID_MENU_ITEM_RESTORE
+Command2=ID_MENU_ITEM_EXIT
+CommandCount=2
 
