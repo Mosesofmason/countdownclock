@@ -191,6 +191,7 @@ BEGIN
     POPUP "&Exit"
     BEGIN
         MENUITEM "&Restore",                    ID_MENU_ITEM_RESTORE
+        MENUITEM "&View",                       ID_MENU_ITEM_VIEW
         MENUITEM "&Exit",                       ID_MENU_ITEM_EXIT
     END
 END

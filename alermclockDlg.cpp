@@ -14,9 +14,9 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
-#include <shellapi.h>
 
-#define _WIN32_IE 0x0500
+
+//#define _WIN32_IE 0x0500
 
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg dialog used for App About
@@ -102,6 +102,7 @@ BEGIN_MESSAGE_MAP(CAlermclockDlg, CDialog)
 	ON_WM_DESTROY()
 	ON_COMMAND(ID_MENU_ITEM_EXIT, OnMenuItemExit)
 	ON_COMMAND(ID_MENU_ITEM_RESTORE, OnMenuItemRestore)
+	ON_COMMAND(ID_MENU_ITEM_VIEW, OnMenuItemView)
 	ON_MESSAGE(WM_USER+100, OnMyMessage)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -378,7 +379,7 @@ void CAlermclockDlg::OnSize(UINT nType, int cx, int cy)
    
 		nid.uCallbackMessage=WM_USER+100; // ¥∞ø⁄œ˚œ¢
 		Shell_NotifyIcon (NIM_ADD, &nid);  
-		PopupBalloon (_T("Some information"), _T("Balloon title"), 1000);
+		PopupBalloon ("Some information", "Balloon title", 10000);
 
 
 
@@ -387,6 +388,17 @@ void CAlermclockDlg::OnSize(UINT nType, int cx, int cy)
 	}
 }
 
+// balloon on tray
+void CAlermclockDlg::PopupBalloon(LPCTSTR Info, LPCTSTR InfoTitle, UINT Timeout, DWORD dwInfoFlags)
+{
+	nid.cbSize=sizeof(NOTIFYICONDATA);
+	nid.uFlags = NIF_INFO;
+	nid.uTimeout = Timeout;
+	nid.dwInfoFlags = dwInfoFlags;
+	strcpy(nid.szInfo,Info ? Info : _T(""));
+	strcpy(nid.szInfoTitle,InfoTitle ? InfoTitle : _T(""));
+    Shell_NotifyIcon(NIM_MODIFY, &nid);
+}
 
 
 void CAlermclockDlg::OnDestroy() 
@@ -415,17 +427,7 @@ void CAlermclockDlg::OnMenuItemRestore()
 }
 
 
-void CAlermclockDlg::PopupBalloon(LPCTSTR Info, LPCTSTR InfoTitle, UINT Timeout)
-{
-#if (_WIN32_IE >= 0x0500)
-	nid.uFlags = NIF_INFO;
-	nid.uTimeout = uTimeout;
-	nid.dwInfoFlags = dwInfoFlags;
-	strcpy(m_nid.szInfo,szMsg ? szMsg : _T(""));
-	strcpy(m_nid.szInfoTitle,szTitle ? szTitle : _T(""));
-	return Shell_NotifyIcon(NIM_MODIFY, &m_nid);
-#endif
-}
+
 
 
 void CAlermclockDlg::OnCancel() 
@@ -433,4 +435,9 @@ void CAlermclockDlg::OnCancel()
 	// TODO: Add extra cleanup here
 	
 	CDialog::OnCancel();
+}
+
+void CAlermclockDlg::OnMenuItemView()
+{
+	PopupBalloon("≤‚ ‘", "≤‚ ‘", 50000);
 }

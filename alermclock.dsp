@@ -78,7 +78,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 D:\Softwares\Microsoft Visual Studio\VC98\Lib\SHELL32.LIB /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
+# ADD LINK32  /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
 
 !ENDIF 
 
