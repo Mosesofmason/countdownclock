@@ -67,6 +67,7 @@ Control9=IDC_SSEC,static,1342308352
 Type=1
 Class=CAlermclockDlg
 Command1=ID_MENU_ITEM_RESTORE
-Command2=ID_MENU_ITEM_EXIT
-CommandCount=2
+Command2=ID_MENU_ITEM_VIEW
+Command3=ID_MENU_ITEM_EXIT
+CommandCount=3
 

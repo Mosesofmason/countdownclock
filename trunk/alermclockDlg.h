@@ -7,7 +7,7 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-
+#include "Subclass.h"
 /////////////////////////////////////////////////////////////////////////////
 // CAlermclockDlg dialog
 
@@ -53,13 +53,14 @@ protected:
 	afx_msg void OnMenuItemRestore();
 	virtual void OnCancel();
 	afx_msg LRESULT OnMyMessage (WPARAM wParam, LPARAM lParam);
+	afx_msg void OnMenuItemView();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 
 
 
 private:
-	void PopupBalloon (LPCTSTR Info, LPCTSTR InfoTitle, /*DWORD Flags, */UINT Timeout);
+	void PopupBalloon (LPCTSTR Info, LPCTSTR InfoTitle, /*DWORD Flags, */UINT Timeout, DWORD dwInfoFlags=NIIF_INFO);
 	NOTIFYICONDATA nid;
 	CFont *_pfont;
 	long int _tot;

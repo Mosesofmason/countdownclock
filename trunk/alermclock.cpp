@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "alermclock.h"
 #include "alermclockDlg.h"
+#include <shellapi.h>
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
