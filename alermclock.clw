@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CAlermclockDlg
+LastClass=CAboutDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "alermclock.h"
@@ -13,9 +13,9 @@ Class2=CAlermclockDlg
 Class3=CAboutDlg
 
 ResourceCount=4
-Resource1=IDD_ALERMCLOCK_DIALOG
+Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
-Resource3=IDD_ABOUTBOX
+Resource3=IDD_ALERMCLOCK_DIALOG
 Resource4=IDR_RIGHT_MENU
 
 [CLS:CAlermclockApp]
@@ -39,6 +39,7 @@ Type=0
 HeaderFile=alermclockDlg.h
 ImplementationFile=alermclockDlg.cpp
 Filter=D
+LastObject=IDOK
 
 [DLG:IDD_ABOUTBOX]
 Type=1
