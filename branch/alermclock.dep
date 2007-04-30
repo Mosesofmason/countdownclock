@@ -1,0 +1,22 @@
+# Microsoft Developer Studio Generated Dependency File, included by alermclock.mak
+
+.\alermclock.cpp : \
+	".\alermclock.h"\
+	".\alermclockDlg.h"\
+	".\StdAfx.h"\
+	
+
+.\alermclock.rc : \
+	".\res\alermclock.ico"\
+	".\res\alermclock.rc2"\
+	
+
+.\alermclockDlg.cpp : \
+	".\alermclock.h"\
+	".\alermclockDlg.h"\
+	".\StdAfx.h"\
+	
+
+.\StdAfx.cpp : \
+	".\StdAfx.h"\
+	
