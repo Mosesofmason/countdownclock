@@ -7,7 +7,7 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-#include "Subclass.h"
+//#include "Subclass.h"
 /////////////////////////////////////////////////////////////////////////////
 // CAlermclockDlg dialog
 
@@ -60,7 +60,7 @@ protected:
 
 
 private:
-	void PopupBalloon (LPCTSTR Info, LPCTSTR InfoTitle, /*DWORD Flags, */UINT Timeout, DWORD dwInfoFlags=NIIF_INFO);
+	BOOL PopupBalloon (LPCTSTR Info, LPCTSTR InfoTitle, /*DWORD Flags, */UINT Timeout, DWORD dwInfoFlags=NIIF_INFO);
 	NOTIFYICONDATA nid;
 	CFont *_pfont;
 	long int _tot;

@@ -15,6 +15,7 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#include <afxpriv.h>
 
 //#define _WIN32_IE 0x0500
 
@@ -135,7 +136,7 @@ BOOL CAlermclockDlg::OnInitDialog()
 	}
 
 	// Set the icon for this dialog.  The framework does this automatically
-	//  when the application's main window is not a dialog
+	// when the application's main window is not a dialog
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	
@@ -143,7 +144,8 @@ BOOL CAlermclockDlg::OnInitDialog()
 	
     char str_combolist[60][30];
 
-	for (int i=0; i<60; i++)
+	int i;
+	for (i=0; i<60; i++)
 	{
 		itoa(i, str_combolist[i], 10);
 	}
@@ -169,7 +171,7 @@ BOOL CAlermclockDlg::OnInitDialog()
 	CStatic *pStc=(CStatic*) GetDlgItem(IDC_SSEC); // point to CStatic
 	LOGFONT lf; // create a logfont
 	_pfont=new CFont; // create a CFont
-	lf.lfHeight=lf.lfHeight*10; // power logfont Height
+	//lf.lfHeight=lf.lfHeight*10; // power logfont Height
 //	_pfont->DeleteObject();
 	_pfont->CreateFontIndirect(&lf); // let CFont get current powered logfont
 	pStc->SetFont(_pfont); // set CStatic Font
@@ -290,6 +292,7 @@ void CAlermclockDlg::OnTimer(UINT nIDEvent)
 		// This macro is used in place of a string containing the name of the 
 		// resource. 
 		PlaySound(MAKEINTRESOURCE(IDS_SWAVE), NULL, SND_NOSTOP|SND_ASYNC|SND_RESOURCE|SND_LOOP);
+		PopupBalloon("设定的时间已经到达", "时间提示信息", 15000);
 	}
 	else
 	{
@@ -359,29 +362,27 @@ LRESULT CAlermclockDlg::OnMyMessage(WPARAM wParam, LPARAM lParam)
 */
 
 // minimized
-void CAlermclockDlg::OnSize(UINT nType, int cx, int cy) 
+void CAlermclockDlg::OnSize (UINT nType, int cx, int cy) 
 {
 	CDialog::OnSize(nType, cx, cy);
 	// TODO: Add your message handler code here
 	if (nType==SIZE_MINIMIZED)
 	{
-	//	MessageBox ("Text");
+	    // MessageBox ("Text");
 		// put app in the tray icon
-		NOTIFYICONDATA   nid;  
+		// NOTIFYICONDATA nid;  
 		nid.cbSize=sizeof (NOTIFYICONDATA);  
 		nid.hWnd=this->m_hWnd;  
-		nid.uFlags=NIF_MESSAGE|NIF_ICON|NIF_TIP;  
+		nid.uFlags=NIF_MESSAGE|NIF_ICON|NIF_TIP;
 		nid.uID=IDR_MAINFRAME;  
 		nid.hIcon=AfxGetApp()->LoadIcon(IDR_MAINFRAME);  
    
 		// nid.szTip="AppName V1.0";
-		strcpy(nid.szTip, "AppName V1.0");  
+		strcpy(nid.szTip, "AppName V1.0");
    
 		nid.uCallbackMessage=WM_USER+100; // 窗口消息
 		Shell_NotifyIcon (NIM_ADD, &nid);  
-		PopupBalloon ("Some information", "Balloon title", 10000);
-
-
+		PopupBalloon ("程序最小化在这里了 ;-)", "提示", 500);
 
 		ShowWindow (SW_HIDE); // 放在需要的地方
 
@@ -389,7 +390,7 @@ void CAlermclockDlg::OnSize(UINT nType, int cx, int cy)
 }
 
 // balloon on tray
-void CAlermclockDlg::PopupBalloon(LPCTSTR Info, LPCTSTR InfoTitle, UINT Timeout, DWORD dwInfoFlags)
+BOOL CAlermclockDlg::PopupBalloon(LPCTSTR Info, LPCTSTR InfoTitle, UINT Timeout, DWORD dwInfoFlags)
 {
 	nid.cbSize=sizeof(NOTIFYICONDATA);
 	nid.uFlags = NIF_INFO;
@@ -397,7 +398,7 @@ void CAlermclockDlg::PopupBalloon(LPCTSTR Info, LPCTSTR InfoTitle, UINT Timeout,
 	nid.dwInfoFlags = dwInfoFlags;
 	strcpy(nid.szInfo,Info ? Info : _T(""));
 	strcpy(nid.szInfoTitle,InfoTitle ? InfoTitle : _T(""));
-    Shell_NotifyIcon(NIM_MODIFY, &nid);
+    return Shell_NotifyIcon(NIM_MODIFY, &nid)?Shell_NotifyIcon(NIM_MODIFY, &nid):false;
 }
 
 
@@ -413,6 +414,7 @@ void CAlermclockDlg::OnDestroy()
 void CAlermclockDlg::OnMenuItemExit() 
 {
 	// TODO: Add your command handler code here
+	PopupBalloon("再见, Bye~", "提示", 0);
 	Shell_NotifyIcon (NIM_DELETE, &nid);
 	CDialog::OnCancel();
 }
@@ -426,10 +428,6 @@ void CAlermclockDlg::OnMenuItemRestore()
 
 }
 
-
-
-
-
 void CAlermclockDlg::OnCancel() 
 {
 	// TODO: Add extra cleanup here
@@ -439,5 +437,21 @@ void CAlermclockDlg::OnCancel()
 
 void CAlermclockDlg::OnMenuItemView()
 {
-	PopupBalloon("测试", "测试", 50000);
+	if (_tot<=0 || _tot>100000)
+	{
+		PopupBalloon("您还没设置时间或者时间已经到了", "程式提示信息", 200);
+	}
+	else
+	{
+		if ((_tot/60)>1)
+		{
+			_chars.Format("%d", _tot/60);
+			PopupBalloon("还剩下大约: "+_chars+" 分钟", "时间提示信息", 2000);
+		}
+		else
+		{
+			_chars.Format("%d", _tot);
+			PopupBalloon("还剩下大约: "+_chars+" 秒", "时间提示信息", 2000);
+		}
+	}
 }
